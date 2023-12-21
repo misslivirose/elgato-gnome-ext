@@ -1,0 +1,10 @@
+{
+    "name" : "Elgato",
+    "description" : "Control keylight",
+    "shell-version" : [
+        "42"
+    ],
+    "url" : "",
+    "uuid" : "elgato-light@orifox.online",
+    "version" : 1.0
+}

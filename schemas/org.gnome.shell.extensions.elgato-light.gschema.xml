@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+    <schema id="org.gnome.shell.extensions.elgato-light"
+    path="/org/gnome/shell/extensions/elgato-light@orifox.online/">
+
+    <key type="s" name="light-ip-address">
+        <default>"192.168.1.31"</default>
+        <summary>"The IP address of the light"</summary>
+    </key>
+
+    <key type="i" name="temperature">
+        <default>5000</default>
+        <summary>"The temperature in K - range 2900K to 7000K"</summary>
+    </key>
+
+    <key type="i" name="bright">
+        <default>50</default>
+        <summary>"The brightness as % - range from 0 to 100"</summary>
+    </key>
+    </schema>
+</schemalist>
