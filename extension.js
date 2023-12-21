@@ -37,8 +37,8 @@ const UIWindow = GObject.registerClass(
 
       this.add_child(indicatorButtonText);
 
-      toggleButton = new PopupMenu.PopupMenuItem('Light Status:');
-      toggleLabel = new St.Label({ text: lightOn ? 'Turn off' : 'Turn on' });
+      toggleButton = new PopupMenu.PopupMenuItem('Turn light:');
+      toggleLabel = new St.Label({ text: lightOn ? 'off' : 'on' });
       toggleButton.add_child(toggleLabel);
       this.menu.addMenuItem(toggleButton);
       toggleButton.connect('activate', () => {
@@ -98,11 +98,11 @@ function toggleLight() {
   if (lightOn) {
     lightOn = false;
     GLib.spawn_command_line_sync('keylight-control --bright 0');
-    toggleLabel.set_text("Turn on");
+    toggleLabel.set_text("on");
   } else {
     lightOn = true;
     GLib.spawn_command_line_sync('keylight-control --bright ' + settings.get_int('bright'));
-    toggleLabel.set_text("Turn off");
+    toggleLabel.set_text("off");
   }
 }
 
