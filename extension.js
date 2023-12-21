@@ -110,7 +110,7 @@ function toggleLight() {
 function updateBrightness(level) {
   if (!lightOn) {
     lightOn = true;
-    toggleLabel.set_text("Turn off");
+    toggleLabel.set_text("off");
   }
   brightness = level.toFixed(0);
   GLib.spawn_command_line_sync('keylight-control  --bright ' + brightness);
@@ -121,7 +121,7 @@ function updateBrightness(level) {
 function updateTemperature(level) {
   if (!lightOn) {
     lightOn = true;
-    toggleLabel.set_text("Turn off");
+    toggleLabel.set_text("off");
   }
 
   let levelToKelvin = 2900 + level*4100;
