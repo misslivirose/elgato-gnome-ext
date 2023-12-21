@@ -94,7 +94,6 @@ function getLightSettingsFromSchema() {
 // Toggle the light on or off
 function toggleLight() {
 
-  // Run `journalctl -f -o cat /usr/bin/gnome-shell in terminal window to view log output
   log('Calling toggleLight...');
   if (lightOn) {
     lightOn = false;
