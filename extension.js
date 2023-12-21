@@ -22,7 +22,7 @@ let uiWindow, indicatorButton, indicatorButtonText, toggleButton, toggleLabel;
 
 // Variables for controlling the light
 let lightOn = false;
-let settings;
+let settings, temperature, brightness;
 
 const UIWindow = GObject.registerClass(
   class UIWindow extends PanelMenu.Button {
@@ -49,7 +49,7 @@ const UIWindow = GObject.registerClass(
       // Add UI elements
       let brightnessPanel = new PopupMenu.PopupBaseMenuItem({activate: false});
       brightnessPanel.add_child(new St.Label({text: 'Brightness: '}));
-      let brightnessSlider = new Slider.Slider(0);
+      let brightnessSlider = new Slider.Slider(brightness/100);
       brightnessPanel.add_child(brightnessSlider);
       this.menu.addMenuItem(brightnessPanel);
       brightnessSlider.connect('drag-end', () => {
@@ -58,9 +58,12 @@ const UIWindow = GObject.registerClass(
 
       let temperaturePanel = new PopupMenu.PopupBaseMenuItem({activate: false});
       temperaturePanel.add_child(new St.Label({text: 'Temperature: '}));
-      let temperatureSlider = new Slider.Slider(0);
+      let temperatureSlider = new Slider.Slider((temperature - 2900)/4100);
       temperaturePanel.add_child(temperatureSlider);
       this.menu.addMenuItem(temperaturePanel);
+      temperatureSlider.connect('drag-end', () => {
+        updateTemperature(temperatureSlider.value);
+      });
 
       this.menu.connect('open-state-changed', (menu, open) => {
         if(open) {
@@ -110,15 +113,35 @@ function updateBrightness(level) {
     lightOn = true;
     toggleLabel.set_text("Turn off");
   }
-  GLib.spawn_command_line_sync('keylight-control  --bright ' + level.toFixed(0));
-  settings.set_int('bright', level.toFixed(0));
+  brightness = level.toFixed(0);
+  GLib.spawn_command_line_sync('keylight-control  --bright ' + brightness);
+  settings.set_int('bright', brightness);
+}
+
+// Update the temperature of the light 
+function updateTemperature(level) {
+  if (!lightOn) {
+    lightOn = true;
+    toggleLabel.set_text("Turn off");
+  }
+
+  let levelToKelvin = 2900 + level*4100;
+  temperature = levelToKelvin.toFixed(0);
+  GLib.spawn_command_line_sync('keylight-control  --temp ' + temperature);
+  settings.set_int('temperature', temperature);
 }
 
 function init() {
   // Load the settings file from extension schema
   settings = getLightSettingsFromSchema();
+  
+  brightness = settings.get_int('bright');
+  temperature = settings.get_int('temperature');
+  
   log('Light IP Address: ' + settings.get_string('light-ip-address'));
-  log('Light Brightness: ' + settings.get_int('bright'));
+  
+  log('Light Brightness: ' + brightness);
+  log('Light Temperature: ' + temperature + 'K');
 }
 
 function enable() {
