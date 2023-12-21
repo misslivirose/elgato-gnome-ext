@@ -17,5 +17,11 @@
         <default>50</default>
         <summary>"The brightness as % - range from 0 to 100"</summary>
     </key>
+
+    <key type="b" name="light-on">
+        <default>false</default>
+        <summary>"Whether the light is on or off"</summary>
+    </key>
+
     </schema>
 </schemalist>
