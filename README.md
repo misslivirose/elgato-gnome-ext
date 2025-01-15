@@ -1,5 +1,5 @@
 # Elgato Light GNOME shell extension
-Interact with an Elgato keylight with a GNOME shell extension. I used this as a way to start familiarizing myself with how to write a shell extension to add controls for my Elgato keylight to the taskbar on my Ubuntu 22.04 desktop (GNOME 42). 
+Interact with an Elgato keylight with a GNOME shell extension. I used this as a way to start familiarizing myself with how to write a shell extension to add controls for my Elgato keylight to the taskbar on my Ubuntu 24.04 desktop (GNOME 46). 
 
 ![A screenshot of the extension, which includes an on/off toggle and two sliders for brightness and temperature control](screenshot.png)
 ## Setup
