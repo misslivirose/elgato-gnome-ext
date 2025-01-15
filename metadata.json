@@ -2,9 +2,9 @@
     "name" : "Elgato",
     "description" : "Control keylight",
     "shell-version" : [
-        "42"
+        "46"
     ],
     "url" : "",
     "uuid" : "elgato-light@orifox.online",
-    "version" : 1.0
+    "version" : 2.0
 }
